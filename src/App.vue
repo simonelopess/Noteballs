@@ -2,7 +2,10 @@
   <NavBar />
   <!-- <RouterLink to="/">Notes</RouterLink>
   <RouterLink to="/stats">Stats</RouterLink> -->
- <RouterView />
+
+  <div class="container is-max-desktop px-2 py-4">
+    <RouterView />
+  </div>
 </template>
 
 
