@@ -12,17 +12,7 @@
         </div>
       </div>
     </div>
-    <div v-for="note in notes" class="card">
-      <div class="card-content" :key="note.id">
-        <div class="content">
-          {{note.content}}
-        </div>
-      </div>
-      <footer class="card-footer">
-        <a href="#" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item">Delete</a>
-      </footer>
-    </div>
+    <Note v-for="note in notes" :key="note.id" :note="note" @deleteClicked="deleteNote"/>
   </div>
 </template>
 
@@ -30,6 +20,7 @@
 <script setup>
 
 import { ref } from 'vue';
+import Note from '@/components/Notes/Note.vue';
 
   const newNote = ref('');
   const newNoteRef = ref(null);
@@ -54,6 +45,10 @@ import { ref } from 'vue';
     notes.value.unshift(newNoteAdd);
     newNote.value = '';
     newNoteRef.value.focus();
+  }
+
+  const deleteNote = (idToDelete) => {
+    notes.value = notes.value.filter(note => note.id !== idToDelete);
   }
 
 </script>
