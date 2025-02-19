@@ -1,18 +1,12 @@
 <template>
   <div class="notes">
-    <div class="card has-background-success p-4 mb-5">
-      <div class="field">
-        <div class="control">
-          <textarea class="textarea" placeholder="Add a new note" v-model="newNote" ref="newNoteRef"></textarea>
-        </div>
-      </div>
-      <div class="field is-grouped is-grouped-right">
-        <div class="control">
-          <button class="button is-link " @click="AddNewNote" :disabled="!newNote">Add New Noe</button>
-        </div>
-      </div>
-    </div>
-    <Note v-for="note in notes" :key="note.id" :note="note" @deleteClicked="deleteNote"/>
+    <AddEditNote v-model="newNote" ref="addEditNoteRef">
+      <!-- <template v-slot:buttons></template> -->
+      <template #buttons>
+        <button class="button is-link " @click="AddNewNote" :disabled="!newNote">Add New Noe</button>
+      </template>
+    </AddEditNote>
+    <Note v-for="note in storeNotes.notes" :key="note.id" :note="note" @deleteClicked="deleteNote"/>
   </div>
 </template>
 
@@ -21,34 +15,23 @@
 
 import { ref } from 'vue';
 import Note from '@/components/Notes/Note.vue';
+import AddEditNote from '@/components/Notes/AddEditNote.vue';
 
   const newNote = ref('');
-  const newNoteRef = ref(null);
+  const addEditNoteRef = ref(null);
+
+  import { useNotesStore } from '@/store/notes';
   
-  const notes = ref([
-    {
-      id: 'id1',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam vero, explicabo, consequuntur vel necessitatibus optio libero aspernatur iusto eius facere voluptates. Doloribus dicta quisquam consequatur, quam nemo minus id fugit.',
-    },
-    {
-      id: 'id2',
-      content: 'This is a shorter note! Woo!'
-    },
-  ]);
+  const storeNotes = useNotesStore();
 
   const AddNewNote = () => {
-    const newNoteAdd = {
-      id: 'id'+ (notes.value.length + 1),
-      content: newNote.value,
-    }
-
-    notes.value.unshift(newNoteAdd);
+    storeNotes.addNotes(newNote.value)
     newNote.value = '';
-    newNoteRef.value.focus();
+    addEditNoteRef.value.focusTextarea()
   }
 
   const deleteNote = (idToDelete) => {
-    notes.value = notes.value.filter(note => note.id !== idToDelete);
+    storeNotes.deleteNotes(idToDelete)
   }
 
 </script>

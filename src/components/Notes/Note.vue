@@ -9,7 +9,7 @@
       </div>
     </div>
     <footer class="card-footer">
-      <a href="#" class="card-footer-item">Edit</a>
+      <RouterLink href="#" class="card-footer-item" :to="`/editNote/${ note.id }`">Edit</RouterLink>
       <a href="#" class="card-footer-item" @click.prevent="
         handleDeleteClicked(note.id)
       ">Delete</a>
@@ -30,7 +30,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['deleteClicked']);
+const emit = defineEmits(['deleteClicked', 'editClicked']);
 
 const characterLength = computed(() => {
     let length = props.note.content.length;
@@ -40,6 +40,10 @@ const characterLength = computed(() => {
 
 const handleDeleteClicked = (id) => {
   emit('deleteClicked', id);
+}
+
+const handleEditClicked = (payload) => {
+  emit('editClicked', payload)
 }
 
 </script>
