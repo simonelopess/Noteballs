@@ -1,6 +1,6 @@
 <template>
   <div class="notes">
-    <AddEditNote v-model="newNote" ref="addEditNoteRef">
+    <AddEditNote v-model="newNote" ref="addEditNoteRef" placeholder="Add a new note">
       <!-- <template v-slot:buttons></template> -->
       <template #buttons>
         <button class="button is-link " @click="AddNewNote" :disabled="!newNote">Add New Noe</button>

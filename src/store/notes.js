@@ -34,6 +34,20 @@ export const useNotesStore = defineStore('notes', {
             //position in an array => pop
             //replace the data => push 
 
+        },
+        updateNotes(id, content) {
+            let index = this.notes.findIndex(note => note.id === id);
+
+            this.notes[index].content = content;
+        }
+    },
+    getters:{
+        getNoteContent: (state) => {
+            return (id) => {
+                return state.notes.filter(note => {
+                    return note.id === id
+                })[0].content
+            }
         }
     }
 })
