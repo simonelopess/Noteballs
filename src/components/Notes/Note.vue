@@ -11,16 +11,18 @@
     <footer class="card-footer">
       <RouterLink href="#" class="card-footer-item" :to="`/editNote/${ note.id }`">Edit</RouterLink>
       <a href="#" class="card-footer-item" @click.prevent="
-        handleDeleteClicked(note.id)
+        modals.deleteNote = true
       ">Delete</a>
     </footer>
+    <ModalDeletedNote v-if="modals.deleteNote" v-model="modals.deleteNote" />
   </div>
 </template>
 
 
 <script setup>  
 
-import { computed } from 'vue';
+import { computed, reactive } from 'vue';
+import ModalDeletedNote from './ModalDeletedNote.vue';
 /* Props */
 
 const props = defineProps({
@@ -45,5 +47,9 @@ const handleDeleteClicked = (id) => {
 const handleEditClicked = (payload) => {
   emit('editClicked', payload)
 }
+
+const modals = reactive({
+  deleteNote: false,
+}) 
 
 </script>

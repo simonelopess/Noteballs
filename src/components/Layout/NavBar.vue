@@ -42,7 +42,7 @@
 
 <script setup>
 
-import { ref, useTemplateRef  } from 'vue';
+import { ref  } from 'vue';
 import { onClickOutside } from '@vueuse/core'
 
  /* Mobile Nava */
