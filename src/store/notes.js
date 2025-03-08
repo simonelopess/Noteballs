@@ -1,5 +1,5 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
-import { collection, getDocs, onSnapshot, setDoc, doc } from "firebase/firestore";
+import { collection, getDocs, onSnapshot, setDoc, doc, deleteDoc} from "firebase/firestore";
 import { db } from '@/config/firebase'
 
 const notesCollectionRef = collection(db, "notes")
@@ -32,8 +32,9 @@ export const useNotesStore = defineStore('notes', {
                 content: newNoteContent
             });
         },
-        deleteNotes(id) {
-            this.notes = this.notes.filter(note => note.id !== id);
+        async deleteNotes(id) {
+            // this.notes = this.notes.filter(note => note.id !== id);
+            await deleteDoc(doc(notesCollectionRef, id));
         },
         editNotes(id, payload) {
             //find the id 
