@@ -14,7 +14,12 @@
         modals.deleteNote = true
       ">Delete</a>
     </footer>
-    <ModalDeletedNote v-if="modals.deleteNote" v-model="modals.deleteNote" />
+    <ModalDeletedNote 
+      v-if="modals.deleteNote" 
+      v-model="modals.deleteNote" 
+      :noteId="note.id" 
+      />
+      <!-- note = props -->
   </div>
 </template>
 
