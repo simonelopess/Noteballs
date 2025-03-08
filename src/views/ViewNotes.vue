@@ -21,6 +21,7 @@ import AddEditNote from '@/components/Notes/AddEditNote.vue';
   const addEditNoteRef = ref(null);
 
   import { useNotesStore } from '@/store/notes';
+  import { useWatchCharacteres } from '@/components/use/useWatchCharacteres';
   
   const storeNotes = useNotesStore();
 
@@ -34,4 +35,5 @@ import AddEditNote from '@/components/Notes/AddEditNote.vue';
     storeNotes.deleteNotes(idToDelete)
   }
 
+  useWatchCharacteres(newNote)
 </script>

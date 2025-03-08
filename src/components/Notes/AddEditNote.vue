@@ -9,7 +9,10 @@
            @input="$emit('update:modelValue', $event.target.value)"  
            class="textarea" 
            :placeholder="placeholder"
-            ref="textareaRef"></textarea>
+            ref="textareaRef"
+            v-autofocus
+            maxlength="100"
+            ></textarea>
         </div>
       </div>
       <div class="field is-grouped is-grouped-right">
@@ -46,7 +49,7 @@ const emit = defineEmits(['update:modelValue'])
 /* Focus Text Area */
 
 import { ref } from 'vue'
-
+import { vAutofocus  } from '@/directives/vAutofocus'
 
 const focusTextarea = () => {
     textareaRef.value.focus()
@@ -56,5 +59,7 @@ const focusTextarea = () => {
 defineExpose({
     focusTextarea
 })
+
+
 
 </script>
