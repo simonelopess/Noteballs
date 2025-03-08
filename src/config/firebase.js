@@ -4,7 +4,7 @@ import { config } from "../../config";
 
 const firebaseConfig = {
     apiKey: config.apiKey,
-    authDomain: config.authDomain,
+    authDomain: config.storageBucket,
     projectId: config.projectId,
     storageBucket: config.storageBucket,
     messagingSenderId: config.messagingSenderId,
