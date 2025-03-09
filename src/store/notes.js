@@ -26,7 +26,8 @@ export const useNotesStore = defineStore('notes', {
                    querySnapshot.forEach((note) => {
                     let notesPayload = {
                      id: note.id,
-                     content: note.data().content
+                     content: note.data().content,
+                     date: note.data().date
                     };
                     notes.push(notesPayload)
                 });
