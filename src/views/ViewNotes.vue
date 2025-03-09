@@ -6,7 +6,13 @@
         <button class="button is-link " @click="AddNewNote" :disabled="!newNote">Add New Noe</button>
       </template>
     </AddEditNote>
-    <Note v-for="note in storeNotes.notes" :key="note.id" :note="note" @deleteClicked="deleteNote"/>
+    <progress v-if="!storeNotes.notesLoaded" class="progress is-large is-success" max="100" />
+
+    <template 
+      v-else
+    >
+      <Note v-for="note in storeNotes.notes" :key="note.id" :note="note" @deleteClicked="deleteNote"/>
+    </template>
   </div>
 </template>
 

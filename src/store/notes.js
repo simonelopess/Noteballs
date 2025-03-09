@@ -14,13 +14,15 @@ const notesCollectionsQuery = query(notesCollectionRef, orderBy("date", "desc"))
 export const useNotesStore = defineStore('notes', {
     state: () => {
         return {
-            notes: []
+            notes: [],
+            notesLoaded: false,
         }
     },
     actions: {
         async getNotes() {
             /* Real time */
 
+            this.notesLoaded = false;
             onSnapshot(notesCollectionsQuery, (querySnapshot) => {
                  let notes = []
                    querySnapshot.forEach((note) => {
@@ -32,6 +34,7 @@ export const useNotesStore = defineStore('notes', {
                     notes.push(notesPayload)
                 });
                 this.notes = notes;
+                this.notesLoaded = true;
               });
             },
         async addNotes(newNoteContent) {
