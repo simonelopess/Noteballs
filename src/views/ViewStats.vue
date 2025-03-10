@@ -30,7 +30,7 @@
 
 <script setup>
     import { ref } from 'vue'
-    import { useWatchCharacteres } from '@/components/use/useWatchCharacteres';
+    import { useWatchCharacteres } from '@/utils/use/useWatchCharacteres';
     import { useNotesStore } from '@/store/notes';
     import { vAutofocus } from '@/directives/vAutofocus';
     

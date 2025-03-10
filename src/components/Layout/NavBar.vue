@@ -26,6 +26,11 @@
         :class="{ 'is-active': showMobileNav }"
         ref="navbarMenuRef"
     >
+      <div class="navbar-start">
+        <button class="button is-small my-3 is-info ml-3">
+          Log out
+        </button>
+      </div>
       <div class="navbar-end">
         <RouterLink to="/" class="navbar-item" active-class="is-active" @click="showMobileNav = false">
           Notes
