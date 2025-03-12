@@ -4,8 +4,6 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword , signOut, o
 import { auth } from '@/config/firebase'
 import { useNotesStore } from './notes'
 
-const storeNote = useStoreNotes()
-
 export const useAuthStore = defineStore('storeAuth', {
     state: () => {
         return {
@@ -17,6 +15,8 @@ export const useAuthStore = defineStore('storeAuth', {
     },
     actions: {
         init() {
+          const storeNote = useNotesStore()
+
           onAuthStateChanged(auth, (user) => {
             if (user) {              
               this.user.id = user.uid;

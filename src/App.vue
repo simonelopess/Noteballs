@@ -12,12 +12,15 @@
 <script setup>
   import { onMounted } from 'vue';
   import NavBar from './components/Layout/NavBar.vue';
-  import { useNotesStore } from '@/store/notes';
+import { useAuthStore } from './store/storeAuth';
 
-  const storeNotes = useNotesStore();
+  const authStore = useAuthStore();
+  
   onMounted(()=>{
-    storeNotes.getNotes()
+    authStore.init()   
   })
+
+
 </script>
 
 <style>
