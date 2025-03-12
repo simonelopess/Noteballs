@@ -23,27 +23,37 @@
 
 <script setup>
 
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import Note from '@/components/Notes/Note.vue';
 import AddEditNote from '@/components/Notes/AddEditNote.vue';
 
   const newNote = ref('');
   const addEditNoteRef = ref(null);
 
+  
+  import { useAuthStore } from '@/store/storeAuth';
   import { useNotesStore } from '@/store/notes';
   import { useWatchCharacteres } from '@/utils/use/useWatchCharacteres';
   
+  
   const storeNotes = useNotesStore();
-
+  const authStore = useAuthStore();
+  
   const AddNewNote = () => {
     storeNotes.addNotes(newNote.value)
     newNote.value = '';
     addEditNoteRef.value.focusTextarea()
   }
-
+  
   const deleteNote = (idToDelete) => {
     storeNotes.deleteNotes(idToDelete)
   }
-
+  
   useWatchCharacteres(newNote)
+  
+
+  onMounted(()=>{
+    authStore.init()   
+  })
+
 </script>

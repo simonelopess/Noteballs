@@ -51,15 +51,6 @@ const characterLength = computed(() => {
     return `${length} ${description}`; ;
 });
 
-
-const handleDeleteClicked = (id) => {
-  emit('deleteClicked', id);
-}
-
-const handleEditClicked = (payload) => {
-  emit('editClicked', payload)
-}
-
 const modals = reactive({
   deleteNote: false,
 }) 
