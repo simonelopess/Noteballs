@@ -2,6 +2,9 @@ import { defineStore, acceptHMRUpdate } from 'pinia'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword , signOut, onAuthStateChanged} from 'firebase/auth'
 
 import { auth } from '@/config/firebase'
+import { useNotesStore } from './notes'
+
+const storeNote = useStoreNotes()
 
 export const useAuthStore = defineStore('storeAuth', {
     state: () => {
@@ -18,7 +21,9 @@ export const useAuthStore = defineStore('storeAuth', {
             if (user) {              
               this.user.id = user.uid;
               this.user.email = user.email;
-              this.router.push('/')
+              this.router.push('/');
+
+              storeNote.init()
             } else {
               this.user = {}
               this.router.replace('/auth')

@@ -6,10 +6,10 @@ import {
     addDoc 
     } from "firebase/firestore";
 import { db } from '@/config/firebase'
+import { useAuthStore } from './storeAuth'; 
 
-const notesCollectionRef = collection(db, "users", 'W2pNDnFuprZlofUEY6pFUGzXBQs2', 'notes')
-const notesCollectionsQuery = query(notesCollectionRef, orderBy("date", "desc"));
-
+let notesCollectionRef;
+let notesCollectionsQuery;
 
 export const useNotesStore = defineStore('notes', {
     state: () => {
@@ -19,6 +19,14 @@ export const useNotesStore = defineStore('notes', {
         }
     },
     actions: {
+        init() {
+            const storeAuth = useAuthStore();
+
+            notesCollectionRef = collection(db, "users", storeAuth.user.id, 'notes')
+            notesCollectionsQuery = query(notesCollectionRef, orderBy("date", "desc"));
+
+            this.getNotes()
+        },
         async getNotes() {
             /* Real time */
 
