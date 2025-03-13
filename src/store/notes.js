@@ -10,6 +10,7 @@ import { useAuthStore } from './storeAuth';
 
 let notesCollectionRef;
 let notesCollectionsQuery;
+let getNotesSnapshot = null;
 
 export const useNotesStore = defineStore('notes', {
     state: () => {
@@ -31,7 +32,7 @@ export const useNotesStore = defineStore('notes', {
             /* Real time */
 
             this.notesLoaded = false;
-            onSnapshot(notesCollectionsQuery, (querySnapshot) => {
+            getNotesSnapshot = onSnapshot(notesCollectionsQuery, (querySnapshot) => {
                  let notes = []
                    querySnapshot.forEach((note) => {
                     let notesPayload = {
