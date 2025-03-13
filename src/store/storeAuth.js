@@ -27,6 +27,7 @@ export const useAuthStore = defineStore('storeAuth', {
             } else {
               this.user = {}
               this.router.replace('/auth')
+              storeNote.clearNotes()
             }
           });
         },
