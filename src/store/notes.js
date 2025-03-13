@@ -32,6 +32,7 @@ export const useNotesStore = defineStore('notes', {
             /* Real time */
 
             this.notesLoaded = false;
+
             getNotesSnapshot = onSnapshot(notesCollectionsQuery, (querySnapshot) => {
                  let notes = []
                    querySnapshot.forEach((note) => {
@@ -47,7 +48,8 @@ export const useNotesStore = defineStore('notes', {
               });
         },
         clearNotes(){
-            this.notes = []
+            this.notes = []            
+            if(getNotesSnapshot) getNotesSnapshot() //unsubscribe from any active listener
         },
         async addNotes(newNoteContent) {
             let currentDate = new Date().getTime(),
