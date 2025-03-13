@@ -63,7 +63,6 @@ export const useAuthStore = defineStore('storeAuth', {
         },
         logoutUser() {
           signOut(auth).then(() => {
-            console.log('usuário deslogado')
           }).catch((error) => {
             // An error happened.
           });
